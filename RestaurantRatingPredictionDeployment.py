@@ -39,8 +39,8 @@ class preprocessing:
             lg.info('preprocessing')
             df.drop(['url', 'address', 'name', 'phone', 'reviews_list', 'menu_item', 'listed_in(city)', 'dish_liked'],
                 axis=1, inplace=True)
-            df['rate'].replace('NEW', np.NaN, inplace=True)
-            df['rate'].replace('-', np.NaN, inplace=True)
+            df['rate'].replace('NEW', np.nan, inplace=True)
+            df['rate'].replace('-', np.nan, inplace=True)
             df['rate'] = df['rate'].astype(str)
             df['rate'] = df['rate'].apply(lambda x: x.replace('/5', ''))
             df['rate'] = df['rate'].apply(lambda x: float(x))
@@ -65,8 +65,9 @@ class preprocessing:
             lg.info('train preprocessing successful')
             return df
         except Exception as e:
-            lg.error('Error')
+            st.error(f"Preprocessing failed: {e}")
             lg.exception(str(e))
+
 
 obj1 = preprocessing()
 zom = pd.read_csv('zomato.csv')
@@ -153,4 +154,3 @@ if select=='Predictions':
         obj4 = prediction()
         pred = obj4.predict(x,y,test_df)
         st.write('The predicted rating is {}'.format(pred))
-
