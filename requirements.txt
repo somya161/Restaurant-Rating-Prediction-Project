@@ -4,4 +4,4 @@ matplotlib
 seaborn
 sklearn
 pickle
-pip
+!pip install --upgrade !pip
